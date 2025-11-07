@@ -1,0 +1,36 @@
+- hosts: dev
+  become: yes
+  tasks:
+    - name: Update apt
+      apt:
+        update_cache: yes
+
+    - name: Install dependencies
+      apt:
+        name: [apt-transport-https, ca-certificates, curl, gnupg, lsb-release]
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure docker service started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install kubectl
+      shell: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        mv kubectl /usr/local/bin/
+      args:
+        chdir: /tmp
+
+    - name: Install Minikube (simple)
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: '0755'
