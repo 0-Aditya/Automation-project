@@ -49,7 +49,7 @@ Copy code
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/automation-project.git
+git clone https://github.com/0-aditya/main-project.git
 cd automation-project/main-project
 2. Create Python virtual environment
 bash
@@ -96,3 +96,4 @@ This project is for learning and demonstration purposes.
 Author
 Aditya
 🔥🖤
+
